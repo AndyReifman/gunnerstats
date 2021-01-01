@@ -10,4 +10,8 @@ class MatchController extends Controller
     public function show(Match $match) {
         dd($match);
     } 
+
+    public function index(){
+    
+    }
 }
