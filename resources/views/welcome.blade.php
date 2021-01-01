@@ -6,7 +6,8 @@
         <p>Hello</p>
     </div>
     <div class="row">
-        <p>{!! Form::selectRange('year', 1957, now()->year) !!}</p>
+        <p>{!! Form::selectYear('year', 1957, now()->year) !!}</p>
+        <p>{!! Form::selectMonth('month') !!}</p>
     </div>
 </div>
 @endsection
