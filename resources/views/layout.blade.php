@@ -22,17 +22,15 @@
   <nav>
     <div class="top-bar">
       <div class="top-bar-left">
-        <ul class="dropdown menu" data-dropdown-menu>
+        <ul class="menu">
           <a href="/" class="menu-text">Gunnerstats</a>
-          <li>
-            <a class="{{ Request::path() === '/' ? 'active' : ''}}" href="/">Home</a>
+          <li class="{{ Request::path() === '/' ? 'active' : ''}}"><a href="/">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="{{ Request::path() === 'about' ? 'active' : ''}}" href="/about"
-              {{ Request::path() === 'about' ? 'aria-current=page' : ''}}>About</a></li>
-          <li class="nav-item">
-            <a class="{{ Request::path() === 'contact' ? 'active' : ''}}" href="/contact"
-              {{Request::path() === 'contact' ? 'aria-current=page' : ''}}>Contact</a>
+          <li class="{{ Request::path() === 'about' ? 'active' : ''}}">
+            <a href="/about">About</a>
+          </li>
+          <li class="{{ Request::path() === 'contact' ? 'active' : ''}}">
+            <a href="/contact">Contact</a>
           </li>
         </ul>
       </div>
