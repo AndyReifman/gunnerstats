@@ -13,7 +13,9 @@
 
 
   <script>
-    $(document).foundation();
+  $(document).ready(function(){
+    $('select').formSelect();
+  });
   </script>
 
 </head>
