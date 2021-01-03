@@ -14,31 +14,31 @@
             </div>
             <div class="col s2">
                 <p><button class="waves-effect waves-light btn-small" type="submit" name="action">
-                  Submit<i class="material-icons right">send</i>
-                </button></p>
+                        Submit<i class="material-icons right">send</i>
+                    </button></p>
             </div>
         </form>
     </div>
     <table class="striped">
-    <thead>
-    <tr>
-    <th>Date</th>
-    <th>Opposition</th>
-    <th>Location</th>
-    <th>Score</th>
-    </tr>
-    </thead>
-    <tbody>
-    @if(!empty($matches))
-        @foreach ($matches as $match)
-        <tr>
-        <td>{{ $match->date }} </td>
-        <td>{{ $match->opposition }} </td>
-        <td>{{ $match->name }} ({{ $match->{'home/away'} == 'Home' ? 'H' : 'A' }}) </td>
-        </tr>
-        @endforeach
-    @endif
-    </tbody>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Opposition</th>
+                <th>Location</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if(!empty($matches))
+            @foreach ($matches as $match)
+            <tr>
+                <td>{{ $match->date }} </td>
+                <td>{{ $match->opposition }} </td>
+                <td>{{ $match->name }} ({{ $match->{'home/away'} == 'Home' ? 'H' : 'A' }}) </td>
+            </tr>
+            @endforeach
+            @endif
+        </tbody>
     </table>
 </div>
 @endsection
