@@ -24,7 +24,7 @@
     <tr>
     <th>Date</th>
     <th>Opposition</th>
-    <th>Home/Away</th>
+    <th>Location</th>
     <th>Score</th>
     </tr>
     </thead>
@@ -34,8 +34,7 @@
         <tr>
         <td>{{ $match->date }} </td>
         <td>{{ $match->opposition }} </td>
-        <td>{{ $match->{'home/away'} }} </td>
-        <td>{{ $match->name }} </td>
+        <td>{{ $match->name }} ( {{ $match->{'home/away'} == 'Home' ? 'H' : 'A' }}) </td>
         </tr>
         @endforeach
     @endif
