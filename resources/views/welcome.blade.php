@@ -7,10 +7,10 @@
             @csrf
             <div class="col s4"></div>
             <div class="col s1 ">
-                <p>{!! Form::selectYear('year', 1957, now()->year) !!}</p>
+                <p>{!! Form::selectYear('year', 1957, now()->year, request()->all() ? request()->year : 1957) !!}</p>
             </div>
             <div class="col s2">
-                <p>{!! Form::selectMonth('month') !!}</p>
+                <p>{!! Form::selectMonth('month', request()->all() ? request()->month : '1') !!}</p>
             </div>
             <div class="col s2">
                 <p><button class="waves-effect waves-light btn-small" type="submit" name="action">
