@@ -24,7 +24,7 @@ class MatchController extends Controller
             ->whereMonth('date',$month)
             ->get();
         foreach ($matches as $match){
-            $match = getScore($match)
+            $match = $this->getScore($match);
         }
         return view('welcome', ['matches' => $matches]);
     }
@@ -33,12 +33,33 @@ class MatchController extends Controller
         $goals = DB::table('appearances')
         ->join('games','games.id','=','appearances.game')
         ->join('goals','appearances.id','=','goals.appearance')
-        ->select('goals.club','Count(*) as goals')
-        ->whereDate('games.date',$match->date)
-        -groupBy('goals.club')
-        ->toSql();
+        ->select('goals.club',DB::raw('Count(*) as goals'),'games.home/away')
+        ->where('games.date','=',$match->date)
+        ->groupBy('goals.club')
+        ->get();
 
-        dd($scorers);
-
+        if(count($goals) == 2){
+            $match->score = $goals[0]->goals.'-'.$goals[1]->goals;
+        } elseif (count($goals) == 0){
+            $match->score = '0-0';
+        } else {
+            //Thanks Nexxai for the Switch statement suggestion.
+            switch($goals[0]->{'home/away'}){
+            case "Home":
+                if($goals[0]->club == 1){
+                    $match->score = $goals[0]->goals .'-0';
+                }else {
+                    $match->score = '0-'.$goals[0]->goals;
+                }
+            case "Away":
+                if($goals[0]->club == 1){
+                    $match->score = '0-'.$goals[0]->goals;
+                }
+                else {
+                    $match->score  = $goals[0]->goals.'-0';
+                }
+            }
+        }
+        return $match;
     }
 }
