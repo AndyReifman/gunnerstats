@@ -23,6 +23,22 @@ class MatchController extends Controller
             ->whereYear('date',$year)
             ->whereMonth('date',$month)
             ->get();
+        foreach ($matches as $match){
+            $match = getScore($match)
+        }
         return view('welcome', ['matches' => $matches]);
+    }
+
+    protected function getScore($match) {
+        $goals = DB::table('appearances')
+        ->join('games','games.id','=','appearances.game')
+        ->join('goals','appearances.id','=','goals.appearance')
+        ->select('goals.club','Count(*) as goals')
+        ->whereDate('games.date',$match->date)
+        -groupBy('goals.club')
+        ->toSql();
+
+        dd($scorers);
+
     }
 }
