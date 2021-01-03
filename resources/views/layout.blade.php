@@ -41,10 +41,11 @@
   </nav>
 
   @yield('content')
+<p style="margin-top: 1em;">
   <footer>
     <div class="footer-copyright">
       <div class="container">
-        Copyright &copy; 2020
+        &copy; 2020 - {{ date('Y') }}
       </div>
     </div>
   </footer>
