@@ -33,6 +33,7 @@
         @foreach ($matches as $match)
         <tr>
         <td>{{ $match->date }} </td>
+        <td>{{ $match->opposition }} </td>
         <td>{{ $match->name }} </td>
         </tr>
         @endforeach

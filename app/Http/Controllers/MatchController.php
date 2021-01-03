@@ -18,7 +18,8 @@ class MatchController extends Controller
 
         $matches = DB::table('games')
             ->join('clubs', 'games.opposition','=','clubs.id')
-            ->select('date','clubs.name','games.home/away')
+            ->join('stadiums', 'games.stadium','=','stadiums.id')
+            ->select('date','clubs.name AS opposition','games.home/away','stadiums.name')
             ->whereYear('date',$year)
             ->whereMonth('date',$month)
             ->get();
