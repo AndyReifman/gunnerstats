@@ -10,8 +10,7 @@
                 <p>{!! Form::selectYear('year', 1957, now()->year, request()->all() ? request()->year : 1957) !!}</p>
             </div>
             <div class="col s2">
-                <p>{!! Form::selectMonth('month', request()->all() ? request()->month : null, ['placeholder' => 'Pick a
-                    month']) !!}</p>
+                <p>{!! Form::selectMonth('month', request()->all() ? request()->month : null, ['placeholder' => 'Pick a month']) !!}</p>
             </div>
             <div class="col s2">
                 <p><button class="waves-effect waves-light btn-small" type="submit" name="action">
