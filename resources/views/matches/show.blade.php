@@ -22,6 +22,8 @@
                     @foreach ($match->homeTeam as $player)
                     <tr>
                         <td> {{ $player->playerName }} </td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -38,6 +40,8 @@
                 <tbody>
                     @foreach ($match->homeTeam as $player)
                     <tr>
+                        <td></td>
+                        <td></td>
                         <td style="text-align: right;"> {{ $player->playerName }} </td>
                     </tr>
                     @endforeach
