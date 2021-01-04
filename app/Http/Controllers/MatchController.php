@@ -86,7 +86,7 @@ class MatchController extends Controller
                 ->leftJoin('goals as g2','g2.appearance','=','appearances.id')
                 ->leftJoin('cards as c','c.appearance','=','appearances.id')
                 ->whereDate('g.date',$match->date)
-                ->whereIn('appearances.club','1')
+                ->where('appearances.club','=','1')
                 ->get();
             $awayTeam = DB::table('appearances')
                 ->join('players as p','player','=','p.id')
