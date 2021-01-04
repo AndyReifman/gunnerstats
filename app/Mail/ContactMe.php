@@ -18,7 +18,8 @@ class ContactMe extends Mailable
      */
     public function __construct()
     {
-        //
+        $this->sender = $sender;
+        $this->body = $body;
     }
 
     /**
@@ -28,6 +29,6 @@ class ContactMe extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->view('emails.contact-me');
     }
 }

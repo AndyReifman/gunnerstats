@@ -16,9 +16,10 @@
 
 
   <script>
-  $(document).ready(function(){
-    $('select').formSelect();
-  });
+    $(document).ready(function(){
+      $('select').formSelect();
+      $('.modal').modal();
+    });
   </script>
 
 </head>
@@ -41,14 +42,29 @@
   </nav>
 
   @yield('content')
-<p style="margin-top: 1em;">
-  <footer>
-    <div class="footer-copyright">
-      <div class="container">
-        &copy; 2020 - {{ date('Y') }}
+  <p style="margin-top: 1em;">
+    <footer>
+      <div class="contact">
+        <a href="#modal">Spot an error?</a>
+        <div id="modal" class="modal">
+          <div class="modal=content">
+            <form method="POST" action="/contact">
+              @csrf
+              <h4>Please let me know what error you found. </h4>
+              <textarea id="textarea" class="materialize-textarea" name="body"></textarea>
+              <div class="modal-footer">
+                <a href="#" class="modal-close waves-effect waves-green btn-flat">Email me</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
-    </div>
-  </footer>
+      <div class="footer-copyright">
+        <div class="container">
+          &copy; 2020 - {{ date('Y') }}
+        </div>
+      </div>
+    </footer>
 </body>
 
 </html>
