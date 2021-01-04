@@ -13,9 +13,11 @@
             <th>{{ $match->{'home/away'} == "Home" ? 'Arsenal' : $match->opposition }}</th>
             </tr>
             </thead>
-        <tbody>
-           
-        </tbody>
+            <tbody>
+                @foreach ($match->homeTeam as $player)
+                <tr><td> {{ $player->playerName }} </td></tr>
+                @endforeach
+            </tbody>
         </table>
         <table class="col s6">
             <thead>
@@ -23,6 +25,11 @@
             <th style="text-align: right;">{{ $match->{'home/away'} == "Home" ? $match->opposition : 'Arsenal' }}</th>
             </tr>
             </thead>
+            <tbody>
+                @foreach ($match->homeTeam as $player)
+                <tr><td style="text-align: right;"> {{ $player->playerName }} </td></tr>
+                @endforeach
+            </tbody>
         </table>
         </div>
     </div>
