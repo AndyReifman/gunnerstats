@@ -10,7 +10,7 @@
                 <p>{!! Form::selectYear('year', 1957, now()->year, request()->all() ? request()->year : 1957) !!}</p>
             </div>
             <div class="col s2">
-                <p>{!! Form::selectMonth('month', request()->all() ? request()->month : '1') !!}</p>
+                <p>{!! Form::selectMonth('month', request()->all() ? request()->month : null, ['placeholder' => 'Pick a month']) !!}</p>
             </div>
             <div class="col s2">
                 <p><button class="waves-effect waves-light btn-small" type="submit" name="action">
@@ -35,7 +35,7 @@
                 <td>{{ $match->date }} </td>
                 <td>{{ $match->opposition }} </td>
                 <td>{{ $match->name }} ({{ $match->{'home/away'} == 'Home' ? 'H' : 'A' }}) </td>
-                <td>{{ $match->score }} </td>
+                <td><a class="waves-effect waves-light btn" href="/match/{{ str_replace('-','',$match->date)}}">{{ $match->score }} </a></td>
             </tr>
             @endforeach
             @endif

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MatchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +27,4 @@ Route::get('/contact', function() {
     return view('contact');
 });
 
-Route::get('match/{match}', 'MatchController@show');
+Route::get('/match/{match}', [MatchController::class, 'show']);

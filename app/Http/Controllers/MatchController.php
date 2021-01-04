@@ -8,21 +8,35 @@ use DB;
 
 class MatchController extends Controller
 {
-    public function show(Match $match) {
-        dd($match);
+    public function show($match) {
+        $match = DB::table('games')
+            ->join('clubs', 'games.opposition','=','clubs.id')
+            ->join('stadiums', 'games.stadium','=','stadiums.id')
+            ->select('date','clubs.name AS opposition','games.home/away','stadiums.name AS venue')
+            ->whereDate('date',$match)
+            ->first();
+        $match = $this->getScore($match);
+        $match = $this->setLineups($match);
+
+        return view('matches.show', ['match' => $match]);
     } 
 
     public function index(){
         $year = request()->year;
-        $month = sprintf("%02d",request()->month);
+        if(request()->filled('month')){
+            $month = sprintf("%02d",request()->month);
+        }
 
         $matches = DB::table('games')
             ->join('clubs', 'games.opposition','=','clubs.id')
             ->join('stadiums', 'games.stadium','=','stadiums.id')
             ->select('date','clubs.name AS opposition','games.home/away','stadiums.name')
             ->whereYear('date',$year)
-            ->whereMonth('date',$month)
+            ->when(request()->filled('month'),function ($q) {
+                return $q->whereMonth('date',sprintf("%02d",request()->month));
+            })
             ->get();
+
         foreach ($matches as $match){
             $match = $this->getScore($match);
         }
@@ -34,7 +48,7 @@ class MatchController extends Controller
         ->join('games','games.id','=','appearances.game')
         ->join('goals','appearances.id','=','goals.appearance')
         ->select('goals.club',DB::raw('Count(*) as goals'),'games.home/away')
-        ->where('games.date','=',$match->date)
+        ->whereDate('games.date',$match->date)
         ->groupBy('goals.club')
         ->get();
 
@@ -61,5 +75,48 @@ class MatchController extends Controller
             }
         }
         return $match;
+    }
+
+    protected function setLineups($match) {
+        switch($match->{'home/away'}){
+        case "Home":
+            $homeTeam = DB::table('appearances')
+                ->join('players as p','player','=','p.id')
+                ->join('games as g','g.id','=','appearances.game')
+                ->leftJoin('goals as g2','g2.appearance','=','appearances.id')
+                ->leftJoin('cards as c','c.appearance','=','appearances.id')
+                ->whereDate('g.date',$match->date)
+                ->whereIn('appearances.club','1')
+                ->get();
+            $awayTeam = DB::table('appearances')
+                ->join('players as p','player','=','p.id')
+                ->join('games as g','g.id','=','appearances.game')
+                ->leftJoin('goals as g2','g2.appearance','=','appearances.id')
+                ->leftJoin('cards as c','c.appearance','=','appearances.id')
+                ->whereDate('g.date',$match->date)
+                ->where('appearances.club','<>','1')
+                ->get();
+        case "Away":
+            $homeTeam = DB::table('appearances')
+                ->join('players as p','player','=','p.id')
+                ->join('games as g','g.id','=','appearances.game')
+                ->leftJoin('goals as g2','g2.appearance','=','appearances.id')
+                ->leftJoin('cards as c','c.appearance','=','appearances.id')
+                ->whereDate('g.date',$match->date)
+                ->where('appearances.club','<>','1')
+                ->get();
+            $awayTeam = DB::table('appearances')
+                ->join('players as p','player','=','p.id')
+                ->join('games as g','g.id','=','appearances.game')
+                ->leftJoin('goals as g2','g2.appearance','=','appearances.id')
+                ->leftJoin('cards as c','c.appearance','=','appearances.id')
+                ->whereDate('g.date',$match->date)
+                ->where('appearances.club','=','1')
+                ->get();
+        }
+        $match->homeTeam = $homeTeam;
+        $match->awayTeam = $awayTeam;
+        return $match;
+
     }
 }
