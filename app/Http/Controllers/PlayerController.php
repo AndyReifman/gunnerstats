@@ -46,7 +46,7 @@ class PlayerController extends Controller
      */
     public function show(Player $player)
     {
-        dd($player);
+        $player = getApps($player);
     }
 
     /**
@@ -81,5 +81,18 @@ class PlayerController extends Controller
     public function destroy(Player $player)
     {
         //
+    }
+
+    protected function getGoals($player){
+
+    }
+
+    protected function getApps($player){
+        $apps = DB::table('appearances')
+        ->join('players','appearances.player','=','player.id')
+        ->select('COUNT(*)')
+        ->where('player.playerName','=',$player->playerName)
+        ->get();
+        dd($apps);
     }
 }
