@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers;
+use App\Http\Controllers\MatchController;
+use App\Http\Controllers\PlayerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,4 +29,4 @@ Route::get('/contact', function() {
 });
 
 Route::get('/match/{match}', [MatchController::class, 'show']);
-Route::get('/player/{player}',[Playercontroller::class, 'show']);
+Route::get('/player/{player}',[PlayerController::class, 'show']);
