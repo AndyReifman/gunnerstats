@@ -21,7 +21,7 @@
                 <tbody>
                     @foreach ($match->homeTeam as $player)
                     <tr>
-                        <td>{{ $player->playerName }}</td>
+                        <td><a href="/player/{{ $player->slug}}>{{ $player->playerName }}</a></td>
                         <td>{{ $player->minute ? $player->minute : '' }}</td>
                         <td>{{ $player->yellow ? $player->yellow : '' }} {{ $player->red ? $player->red : '' }}</td>
                     </tr>
@@ -42,7 +42,7 @@
                     <tr>
                         <td>{{ $player->yellow ? $player->yellow : '' }} {{ $player->red ? $player->red : '' }}</td>
                         <td>{{ $player->minute ? $player->minute : '' }}</td>
-                        <td style="text-align: right;"> {{ $player->playerName }}</td>
+                        <td style="text-align: right;"><a href="/player/{{ $player->slug}}>{{ $player->playerName }}</a></td>
                     </tr>
                     @endforeach
                 </tbody>
