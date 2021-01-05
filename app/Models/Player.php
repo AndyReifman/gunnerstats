@@ -10,6 +10,6 @@ class Player extends Model
     use HasFactory;
 
     public function getRouteKeyName() {
-        return 'playerName';
+        return 'slug';
     }
 }
