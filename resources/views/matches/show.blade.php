@@ -38,7 +38,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($match->homeTeam as $player)
+                    @foreach ($match->awayTeam as $player)
                     <tr>
                         <td>{{ $player->yellow ? $player->yellow : '' }} {{ $player->red ? $player->red : '' }}</td>
                         <td>{{ $player->minute ? $player->minute : '' }}</td>
