@@ -45,15 +45,16 @@
   <p style="margin-top: 1em;">
     <footer>
       <div class="contact">
-        <a href="#modal">Spot an error?</a>
+        <a href="#modal" class="modal-trigger">Spot an error?</a>
         <div id="modal" class="modal">
-          <div class="modal=content">
+          <div class="modal-content">
             <form method="POST" action="/contact">
               @csrf
               <h4>Please let me know what error you found. </h4>
               <textarea id="textarea" class="materialize-textarea" name="body"></textarea>
               <div class="modal-footer">
-                <a href="#" class="modal-close waves-effect waves-green btn-flat">Email me</button>
+                <a class="modal-close waves-effect waves-green btn-flat" type="submit">Email me</button>
+                <a href="" class="modal-close waves-effect waves-green btn-flat">Cancel</button>
               </div>
             </form>
           </div>
