@@ -46,7 +46,7 @@ class PlayerController extends Controller
      */
     public function show(Player $player)
     {
-        //
+        dd($player);
     }
 
     /**
