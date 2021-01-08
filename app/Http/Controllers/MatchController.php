@@ -35,6 +35,7 @@ class MatchController extends Controller
             ->when(request()->filled('month'),function ($q) {
                 return $q->whereMonth('date',sprintf("%02d",request()->month));
             })
+            ->orderBy('date')
             ->get();
 
         foreach ($matches as $match){
@@ -114,9 +115,8 @@ class MatchController extends Controller
                 ->where('appearances.club','=','1')
                 ->get();
         }
-        $match->homeTeam = $homeTeam;
-        $match->awayTeam = $awayTeam;
+        $match->homeTeam = $homeTeam->groupBy('playerName');
+        $match->awayTeam = $awayTeam->groupBy('playerName');
         return $match;
-
     }
 }
