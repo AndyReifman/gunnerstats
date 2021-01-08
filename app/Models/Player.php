@@ -12,4 +12,16 @@ class Player extends Model
     public function getRouteKeyName() {
         return 'slug';
     }
+
+    public function goals(){
+        return $this->hasMany(Goals::class);
+    }
+
+    public function cards(){
+        return $this->hasMany(Goals::class);
+    }
+
+    public function matches(){
+        return $this->ManyToMany(Match::class);
+    }
 }
